@@ -29,7 +29,7 @@ $string['click_to_continue'] = 'Click to return to your last-accessed activity.'
 $string['returnl:addinstance'] = 'Add a new return block';
 $string['return:myaddinstance'] = 'Add a new return block to the My Moodle page';
 $string['lightbox'] = 'Display as a lightbox at the bottom of the page.';
-$string['privacy:metadata'] = 'The Return block retrieves a database entry containing the user's last-visited activity and uses it to format a link for display. This entry is not stored after the user has navigated away.';
+$string['privacy:metadata'] = "The Return block retrieves a database entry containing the user's last-visited activity and uses it to format a link for display. This entry is not stored after the user has navigated away.";
 
 
 ?>
