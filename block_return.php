@@ -32,10 +32,9 @@ class block_return extends block_base {
         //Finds the latest log entry where the active user viewed a course module.
         global $DB;
 
-        $sql = 'SELECT timecreated, contextinstanceid, component, userid FROM {logstore_standard_log} WHERE userid='.$uid.' AND action="viewed" AND component LIKE "mod_%" ORDER BY timecreated DESC LIMIT 1';
+        $sql = 'SELECT timecreated, contextinstanceid, component, userid FROM {logstore_standard_log} WHERE userid=? AND action="viewed" AND component LIKE "mod_%" ORDER BY timecreated DESC LIMIT 1';
         
-
-        $outputfull = $DB->get_records_sql($sql);
+        $outputfull = $DB->get_records_sql($sql, array(0=>$uid));
 
         //return the first (and only) row of this SQL request.
         return array_pop($outputfull);
