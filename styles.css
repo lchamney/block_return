@@ -1,4 +1,4 @@
-.return_lightbox   {
+.block_return return_lightbox   {
   display: block;
   position: fixed;
   z-index: 900;
@@ -14,7 +14,7 @@ font-size:large;
 border-top: 3px solid darkgrey;
 }
 
-.return_lightbox:hover {
+.block_return return_lightbox:hover {
 background-color: grey;
 color: black;
 border-top: 3px solid black;
