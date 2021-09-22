@@ -28,8 +28,9 @@ class block_return_edit_form extends block_edit_form {
  
         $mform->addElement('header', 'config_header', get_string('blocksettings', 'block'));
  
-        $mform->addElement('checkbox', 'config_lightbox', get_string('lightbox', 'block_return'));
+        $mform->addElement('advcheckbox', 'config_lightbox', get_string('lightbox', 'block_return'));
         $mform->setDefault('config_lightbox', 1);
+        $mform->setType('config_lightbox', PARAM_RAW);    
 
         
     }
