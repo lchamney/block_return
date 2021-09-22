@@ -43,7 +43,6 @@ class block_return extends block_base {
            $activity = $this->get_module_id($table);
            if ($activity)
            {
-                //creates the lightbox with the correct link and message.
                $this->content->text = $this->get_a($table, $activity);
         
                return $this->content;
