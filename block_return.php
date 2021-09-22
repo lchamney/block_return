@@ -84,12 +84,9 @@ class block_return extends block_base {
         //formats the component name to remove Frankenstyle
         $comp_name = str_replace("mod_", "", $component);
         
-        $url = $this->page->url;
+        $url = new moodle_url("/mod/{$comp_name}/view.php", ['id' => $activity]);
         
-        //builds the link: front page domain, slash mod, slash module type, slash the module renderer, last specifiying to specific activity number
-        $link = $url.'mod/'.$comp_name.'/view.php?id='.$activity;
-        
-        return $link;
+        return $url->out();
 
     }
     
