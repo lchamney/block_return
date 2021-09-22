@@ -96,7 +96,7 @@ class block_return extends block_base {
         
         if($this->config->lightbox)
         {
-            $output = '<a href='.$link.'><div class="block_return_lightbox">'.$msg.'</div></a>';
+            $output = '<a href='.$link.'><div class="return_lightbox">'.$msg.'</div></a>';
         }
         else
         {
