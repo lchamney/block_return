@@ -26,14 +26,18 @@
 defined('MOODLE_INTERNAL') || die();
 
 class block_return extends block_base {
+    /**
+    * Initializes the block
+    */
     public function init() {
         $this->title = get_string('return', 'block_return');
-    }
-    
+   }
+    /**
+    * returns block content
+    */
     public function get_content() {
-    global $USER;
+        global $USER;
 
-        //variable $uid is set to the id of the active user
        $uid = $USER->id;
         
         if ($uid)
@@ -50,9 +54,14 @@ class block_return extends block_base {
         }
     }
     
+    /**
+    * Finds the most recent log entry where the active user viewed a course module.
+    * @param int $uid User ID of active user
+    * @return StdObject Data object containing timecreated, contextinstanceid, and userid representing last course module accessed
+    */
     private function get_latest($uid)
     {
-        //Finds the latest log entry where the active user viewed a course module.
+        //
         global $DB;
 
         $sql = 'SELECT timecreated, contextinstanceid, component, userid FROM {logstore_standard_log} WHERE userid=? AND action="viewed" AND component LIKE "mod_%" ORDER BY timecreated DESC LIMIT 1';
@@ -63,19 +72,28 @@ class block_return extends block_base {
         return array_pop($outputfull);
     }
     
-    private function get_module_id($table)
+    /**
+    * Returns the module id of the provided data object
+    * @param StdObject $object Data object containing module id
+    * @return string Module ID 
+    */
+    private function get_module_id($object)
     {
         //finds the viewed module's id in the table.
-        $table_array = (array) $table;
+        $table_array = (array) $object;
         $output = $table_array['contextinstanceid'];
         return $output;
     }
     
-    
-    private function get_link($table, $activity)
+    /**
+    * Builds a hyperlink to the module indicated
+    * @param $object StdObject Data object containing module information
+    * @param $activity ID of course module
+    * @return URL of course module view
+    */
+    private function get_link($object, $activity)
     {   
-        //builds a link to the last viewed activity
-        $tablearray = (array) $table;
+        $tablearray = (array) $object;
         
         //gets the component name (scorm, calendar, etc) from the table
         $component = $tablearray['component'];
@@ -89,10 +107,16 @@ class block_return extends block_base {
 
     }
     
-    private function get_a($table, $activity)
+    /**
+    * Puts together an <a> tag for the hyperlink
+    * @param $object StdObject Data object containing module information
+    * @param $activity ID of course module
+    * @return <a> tag for hyperlink
+    */
+    private function get_a($object, $activity)
     {
         $msg = get_string('click_to_continue', 'block_return');
-        $link = $this->get_link($table, $activity);
+        $link = $this->get_link($object, $activity);
         
         if($this->config->lightbox)
         {
