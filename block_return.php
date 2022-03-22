@@ -36,6 +36,10 @@ class block_return extends block_base {
     * returns block content
     */
     public function get_content() {
+        if ($this->content !== NULL) {
+            return $this->content;
+        }
+        
         global $USER;
 
        $uid = $USER->id;
@@ -139,4 +143,3 @@ class block_return extends block_base {
 
 }
 
-?>
