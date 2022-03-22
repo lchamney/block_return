@@ -1,7 +1,7 @@
  <?php
 // …
 
-namespace block_returnh\privacy;
+namespace block_return\privacy;
 
 class provider implements
     // This plugin does not store any personal user data.
