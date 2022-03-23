@@ -30,8 +30,6 @@ class block_return_edit_form extends block_edit_form {
  
         $mform->addElement('advcheckbox', 'config_lightbox', get_string('lightbox', 'block_return'));
         $mform->setDefault('config_lightbox', 1);
-        $mform->setType('config_lightbox', PARAM_RAW);    
-
         
     }
 }
