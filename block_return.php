@@ -68,7 +68,7 @@ class block_return extends block_base {
         //
         global $DB;
 
-        $sql = 'SELECT timecreated, contextinstanceid, component, userid FROM {logstore_standard_log} WHERE userid=? AND action="viewed" AND component LIKE "mod_%" ORDER BY timecreated DESC LIMIT 1';
+        $sql = "SELECT timecreated, contextinstanceid, component, userid FROM {logstore_standard_log} WHERE userid=? AND action='viewed' AND component LIKE 'mod_%' ORDER BY timecreated DESC LIMIT 1";
         
         $outputfull = $DB->get_records_sql($sql, array(0=>$uid));
 
