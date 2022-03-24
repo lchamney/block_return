@@ -47,4 +47,3 @@
         'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
 );
-?>
