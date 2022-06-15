@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
+ /**
  * Privacy Subsystem implementation for block_return.
  *
  * @package    block_return
@@ -22,15 +22,15 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace block_return\privacy;
+ namespace block_return\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+ defined('MOODLE_INTERNAL') || die();
 
-class provider implements
+ class provider implements
     // This plugin does not store any personal user data.
     \core_privacy\local\metadata\null_provider {
 
-    /**
+     /**
      * Get the language string identifier with the component's language
      * file to explain why this plugin stores no data.
      *
@@ -40,4 +40,4 @@ class provider implements
     public static function get_reason() : string {
         return 'privacy:metadata';
     }
-}
+ }
