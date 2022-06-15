@@ -27,16 +27,16 @@ defined('MOODLE_INTERNAL') || die();
 
 class block_return extends block_base {
     /**
-    * Initializes the block
-    */
+     * Initializes the block
+     */
     public function init() {
         $this->title = get_string('return', 'block_return');
-   }
+    }
     /**
-    * returns block content
-    */
+     * returns block content
+     */
     public function get_content() {
-        if ($this->content !== NULL) {
+        if ($this->content !== null) {
             return $this->content;
         }
         
@@ -47,96 +47,92 @@ class block_return extends block_base {
         if ($uid)
         {
 
-           $table = $this->get_latest($uid);
-           $activity = $this->get_module_id($table);
-           if ($activity)
-           {
-               $this->content->text = $this->get_a($table, $activity);
+            $table = $this->get_latest($uid);
+            $activity = $this->get_module_id($table);
+            if ($activity)
+            {
+                $this->content->text = $this->get_a($table, $activity);
         
-               return $this->content;
-           }
-        }
+                return $this->content;
+            }
+         }
     }
     
     /**
-    * Finds the most recent log entry where the active user viewed a course module.
-    * @param int $uid User ID of active user
-    * @return StdObject Data object containing timecreated, contextinstanceid, and userid representing last course module accessed
-    */
-    private function get_latest($uid)
-    {
-        //
+     * Finds the most recent log entry where the active user viewed a course module.
+     * @param int $uid User ID of active user
+     * @return StdObject Data object containing timecreated, contextinstanceid, and userid representing last course module accessed
+     */
+    private function get_latest($uid) {
+        
         global $DB;
 
-        $sql = "SELECT timecreated, contextinstanceid, component, userid FROM {logstore_standard_log} WHERE userid=? AND action='viewed' AND component LIKE 'mod_%' ORDER BY timecreated DESC LIMIT 1";
         
-        $outputfull = $DB->get_records_sql($sql, array(0=>$uid));
+        $sql = "SELECT timecreated, contextinstanceid, component, userid FROM {logstore_standard_log} WHERE userid=? 
+             AND action='viewed' AND component LIKE 'mod_%' ORDER BY timecreated DESC LIMIT 1";
+        
+        $outputfull = $DB->get_records_sql($sql, array(0 => $uid));
 
-        //return the first (and only) row of this SQL request.
         return array_pop($outputfull);
     }
     
     /**
-    * Returns the module id of the provided data object
-    * @param StdObject $object Data object containing module id
-    * @return string Module ID 
-    */
-    private function get_module_id($object)
-    {
+     * Returns the module id of the provided data object
+     * @param StdObject $object Data object containing module id
+     * @return string Module ID 
+     */
+    private function get_module_id($object) {
         //finds the viewed module's id in the table.
-        $table_array = (array) $object;
-        $output = $table_array['contextinstanceid'];
+        $tablearray = (array) $object;
+        $output = $tablearray['contextinstanceid'];
         return $output;
     }
     
     /**
-    * Builds a hyperlink to the module indicated
-    * @param $object StdObject Data object containing module information
-    * @param $activity ID of course module
-    * @return URL of course module view
-    */
-    private function get_link($object, $activity)
-    {   
+     * Builds a hyperlink to the module indicated
+     * @param $object StdObject Data object containing module information
+     * @param $activity ID of course module
+     * @return URL of course module view
+     */
+    private function get_link($object, $activity) {   
         $tablearray = (array) $object;
         
         //gets the component name (scorm, calendar, etc) from the table
         $component = $tablearray['component'];
         
-        //formats the component name to remove Frankenstyle
-        $comp_name = str_replace("mod_", "", $component);
+        //Formats the component name to remove Frankenstyle
+        $compname = str_replace("mod_", "", $component);
         
-        $url = new moodle_url("/mod/{$comp_name}/view.php", ['id' => $activity]);
+        $url = new moodle_url("/mod/{$compname}/view.php", ['id' => $activity]);
         
         return $url->out();
-
     }
     
     /**
-    * Puts together an <a> tag for the hyperlink
-    * @param $object StdObject Data object containing module information
-    * @param $activity ID of course module
-    * @return <a> tag for hyperlink
-    */
-    private function get_a($object, $activity)
-    {
+     * Puts together an <a> tag for the hyperlink
+     * @param $object StdObject Data object containing module information
+     * @param $activity ID of course module
+     * @return <a> tag for hyperlink
+     */
+    private function get_a($object, $activity) {
         $msg = get_string('click_to_continue', 'block_return');
         $link = $this->get_link($object, $activity);
         
-        if($this->config->lightbox)
-        {
+        if($this->config->lightbox) {
             $output = '<a href='.$link.'><div class="return_lightbox">'.$msg.'</div></a>';
         }
-        else
-        {
+        else {
             $output = '<a href='.$link.'>'.$msg.'</a>';
         }
         return $output;
         
     }
 
-    function has_config() {return true;}
+    public function has_config() {
+        return true;
+    }
 
-    function hide_header() {
+    public function hide_header() {
         return TRUE;
 }
 
