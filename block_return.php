@@ -41,6 +41,7 @@ class block_return extends block_base {
         }
         
         global $USER;
+        global $DB;
 
        $uid = $USER->id;
         
