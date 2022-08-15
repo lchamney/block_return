@@ -23,6 +23,6 @@
  */
 
 $plugin->component = 'block_return';  
-$plugin->release = "1.0.3";
-$plugin->version = 2022061500;  
+$plugin->release = "1.0.4";
+$plugin->version = 2022081500;  
 $plugin->requires = 2010112400;
